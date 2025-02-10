@@ -4,10 +4,7 @@ import com.igor.notification_scheduler_api.bussiness.AppointmentService;
 import com.igor.notification_scheduler_api.controller.dtos.in.AppointmentRecord;
 import com.igor.notification_scheduler_api.controller.dtos.out.AppointmentRecordOut;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/appointment")
@@ -25,6 +22,14 @@ public class AppointmentController {
     ) {
 
         return ResponseEntity.ok(appointmentService.saveAppointment(request));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AppointmentRecordOut> findAppointmentById(
+            @PathVariable(name = "id") Long id
+    ) {
+
+        return ResponseEntity.ok(appointmentService.findAppointmentById(id));
     }
 
 }

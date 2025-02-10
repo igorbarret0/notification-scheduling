@@ -3,6 +3,7 @@ package com.igor.notification_scheduler_api.bussiness;
 import com.igor.notification_scheduler_api.bussiness.mapper.AppointmentMapper;
 import com.igor.notification_scheduler_api.controller.dtos.in.AppointmentRecord;
 import com.igor.notification_scheduler_api.controller.dtos.out.AppointmentRecordOut;
+import com.igor.notification_scheduler_api.infrastrucutre.exception.NotFoundException;
 import com.igor.notification_scheduler_api.infrastrucutre.repository.AppointmentRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,14 @@ public class AppointmentService {
         appointmentRepository.save(response);
 
         return appointmentMapper.toAppointmentRecordOut(response);
+    }
+
+    public AppointmentRecordOut findAppointmentById(Long id) {
+
+        var appointment = appointmentRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Could not found a appointment with the provided ID: " + id));
+
+        return appointmentMapper.toAppointmentRecordOut(appointment);
     }
 
 }
