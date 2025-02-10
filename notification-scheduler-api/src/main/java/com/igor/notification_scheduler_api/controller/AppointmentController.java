@@ -33,7 +33,7 @@ public class AppointmentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> cancel_appointment(
+    public ResponseEntity<Void> cancelAppointment(
             @PathVariable(name = "id") Long id
     ) {
 
